@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template, redirect, flash, sessio
+from flask import Flask,request,render_template, redirect, flash, session
 import mlap
 from modles.register import Register
 app = Flask(__name__)
@@ -8,7 +8,7 @@ mlap.connect()
 def home():
     return render_template("home.html")
 
-@route('/login', methods=["GET","POST"])
+@app.route('/login', methods=["GET","POST"])
 def login():
     if request.method == "GET":
         return render_template("login.html")
@@ -19,7 +19,7 @@ def login():
         if user!=None:
             if user.password==password :
                 session["token"] = username
-                return redirect("/menu" +str(user.id))
+                return redirect("/register" +str(user.id))
             else:
                 flash("Invalid password")
                 return render_template("login.html")
@@ -36,7 +36,7 @@ def logout():
         return redirect("/")
 
 @app.route('/signUp',methods=["GET","POST"])
-def home():
+def signUp():
     if request.method == "GET":
         return render_template("signUp.html")
     elif request.method == "POST":
@@ -44,9 +44,12 @@ def home():
         password=request.form["password"]
         dateOfBirth = request.form["dateOfBirth"]
         emailOrSdt = request.form["emailOrSdt"]
+        print(type(emailOrSdt))
         f_objects =  Register(username=username, password= password,dateOfBirth=dateOfBirth,emailOrSdt=emailOrSdt)
         f_objects.save()
-        return redirect("/menu"+str(f_objects.id))
-
+        return redirect("/register"+str(f_objects.id))
+@app.route('/register')
+def register():
+    return render_template("register.html")
 if __name__ == '__main__':
   app.run(debug=True)

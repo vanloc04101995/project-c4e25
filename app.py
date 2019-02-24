@@ -24,7 +24,7 @@ def login():
                 flash("Invalid password")
                 return render_template("login.html")
         else:
-            flash("User not found")
+            flash("Not found")
             return render_template("login.html")
 
 @app.route("/logout")

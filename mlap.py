@@ -1,10 +1,10 @@
 import mongoengine
 
-#mongodb://<dbuser>:<dbpassword>@ds113815.mlab.com:13815/c4e25web
+# mongodb://<dbuser>:<dbpassword>@ds255005.mlab.com:55005/sound
 
-host = "ds113815.mlab.com"
-port = 13815
-db_name = "c4e25web"
+host = "@ds255005.mlab.com"
+port = 55005
+db_name = "sound"
 user_name = "admin"
 password = "admin1"
 

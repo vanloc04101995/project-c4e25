@@ -48,8 +48,11 @@ def signUp():
         f_objects =  Register(username=username, password= password,dateOfBirth=dateOfBirth,emailOrSdt=emailOrSdt)
         f_objects.save()
         return redirect("/register"+str(f_objects.id))
-@app.route('/register')
-def register():
-    return render_template("register.html")
+# @app.route('/register', methods= ["GET","POST"])
+# def register():
+#     if request.method == "GET":
+#         return render_template("register.html")
+#     elif request.method == "POST":
+
 if __name__ == '__main__':
   app.run(debug=True)

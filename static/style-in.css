@@ -1,0 +1,82 @@
+@import "https://use.fontawesome.com/releases/v5.6.3/css/all.css";
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial;
+    padding: 10px;
+    background: #f1f1f1;
+  }
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  .header {
+    padding: 20px;
+    text-align: center;
+    background: white;
+  }
+  .header h1 {
+    font-size: 50px;
+  }
+  .play{
+    border: 1px solid black;
+    padding: 30px;
+    text-align: center;
+    background: white;
+  }
+  .play i{
+    font-size: 80px;
+  }
+  .share {
+    display: flex;
+    padding: 30px;
+    text-align: center;
+    background: white;
+  }
+  .share > div:nth-child(3) {
+    margin-left: auto;
+  }
+  .share > div:nth-child(2) {
+    margin-left: auto;
+  }
+  .footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+  }
+  .content{
+    padding: 20px;
+    display: block;
+    /* flex-direction: row;
+    justify-content: space-between; */
+  }
+  .content i{
+    font-size: 80px;
+    margin-right: 40px;
+  }
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+  @media screen and (max-width: 400px) {
+    .topnav a {
+      float: none;
+      width: 100%;
+    }
+    .content i{
+      text-align: center;
+      float: none;
+      width: 100%;
+    }
+  }

@@ -1,31 +1,32 @@
-from flask import Flask,request,render_template, redirect, flash, sessio
-import mlap
-from modles.register import Register
+from flask import Flask,request,render_template, redirect, flash, session
+import mlab
+from models.register import Register
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "<d9H\9nhpv4eRD@$mT*bg(Z@=bSCF:*=Q-anNQv3*4a;~[qUCeNx+"
-mlap.connect()
+mlab.connect()
+
 @app.route('/')
 def home():
-    return render_template("home.html")
+    return render_template("homepage-out.html")
 
-@route('/login', methods=["GET","POST"])
+@app.route('/login', methods=["GET","POST"])
 def login():
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("login-form.html")
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         user = Register.objects(username=username).first()
-        if user!=None:
+        if user != None:
             if user.password==password :
                 session["token"] = username
-                return redirect("/menu" +str(user.id))
+                return render_template("homepage-in.html")
             else:
                 flash("Invalid password")
-                return render_template("login.html")
+                return redirect("/login")
         else:
-            flash("Not found")
-            return render_template("login.html")
+            flash("Invalid username")
+            return redirect("/login")
 
 @app.route("/logout")
 def logout():
@@ -35,18 +36,18 @@ def logout():
     else:
         return redirect("/")
 
-@app.route('/signUp',methods=["GET","POST"])
-def home():
+@app.route('/signup',methods=["GET","POST"])
+def signup():
     if request.method == "GET":
-        return render_template("signUp.html")
+        return render_template("sign-up-form.html")
     elif request.method == "POST":
         username= request.form["username"]
         password=request.form["password"]
         dateOfBirth = request.form["dateOfBirth"]
-        emailOrSdt = request.form["emailOrSdt"]
-        f_objects =  Register(username=username, password= password,dateOfBirth=dateOfBirth,emailOrSdt=emailOrSdt)
+        email = request.form["email"]
+        f_objects =  Register(username=username, password= password,dateOfBirth=dateOfBirth,email=email)
         f_objects.save()
-        return redirect("/menu"+str(f_objects.id))
+        return "OK"
 
 if __name__ == '__main__':
   app.run(debug=True)

@@ -4,4 +4,4 @@ class Register(Document):
     username = StringField()
     password = StringField()
     dateOfBirth = StringField()
-    emailOrSdt = StringField()
+    email = StringField()

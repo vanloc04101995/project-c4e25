@@ -6,13 +6,22 @@ body{
   background: url("static\images\background.jpg") no-repeat;
 }
 .login-box{
-  width :280px;
+ 
+  height: 360px;
+  border: 5px solid black;
+  width :380px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   color: black;
+  background-color: white;
 }
+
+.button:active:after .login-box{
+  display: block;
+}
+
 .login-box h1{
   float:left;
   font-size:  40px;
@@ -54,3 +63,6 @@ body{
   font-size:  18px;
   cursor: pointer;
 }
+
+
+ 

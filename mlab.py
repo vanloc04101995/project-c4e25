@@ -1,6 +1,6 @@
 import mongoengine
 
-#mongodb://<dbuser>:<dbpassword>@ds113815.mlab.com:13815/c4e25-web
+# mongodb://<dbuser>:<dbpassword>@ds113815.mlab.com:13815/c4e25-web
 host = "ds113815.mlab.com"
 port = 13815
 db_name = "c4e25-web"

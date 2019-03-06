@@ -5,14 +5,10 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "<d9H\9nhpv4eRD@$mT*bg(Z@=bSCF:*=Q-anNQv3*4a;~[qUCeNx+"
 mlab.connect()
 
-@app.route('/')
+@app.route('/', methods=["GET","POST"])
 def home():
-    return render_template("homepage-out.html")
-
-@app.route('/login', methods=["GET","POST"])
-def login():
     if request.method == "GET":
-        return render_template("login-form.html")
+        return render_template("homepage-out.html")
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -23,10 +19,30 @@ def login():
                 return render_template("homepage-in.html")
             else:
                 flash("Invalid password")
-                return redirect("/login")
+                return redirect("/")
         else:
             flash("Invalid username")
-            return redirect("/login")
+            return redirect("/")
+
+
+# @app.route('/login', methods=["GET","POST"])
+# def login():
+#     if request.method == "GET":
+#         return render_template("login-form.html")
+#     elif request.method == "POST":
+#         username = request.form["username"]
+#         password = request.form["password"]
+#         user = Register.objects(username=username).first()
+#         if user != None:
+#             if user.password==password :
+#                 session["token"] = username
+#                 return render_template("homepage-in.html")
+#             else:
+#                 flash("Invalid password")
+#                 return redirect("/login")
+#         else:
+#             flash("Invalid username")
+#             return redirect("/login")
 
 @app.route("/logout")
 def logout():

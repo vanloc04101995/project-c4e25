@@ -1,6 +1,7 @@
 from flask import Flask,request,render_template, redirect, flash, session
 import mlab
 from models.register import Register
+from models.register import Sound
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "<d9H\9nhpv4eRD@$mT*bg(Z@=bSCF:*=Q-anNQv3*4a;~[qUCeNx+"
 mlab.connect()
@@ -8,7 +9,9 @@ mlab.connect()
 @app.route('/', methods=["GET","POST"])
 def home():
     if request.method == "GET":
-        return render_template("homepage-out.html")
+        data = Sound.objects()
+        print(data)
+        return render_template("homepage-out.html", dataHtml = data)
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]

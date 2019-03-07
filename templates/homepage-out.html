@@ -12,12 +12,12 @@
 <body>
 <div class="container">
   <div class="topnav">
-    <a  href="#">Home</a>
+    <a><i class="fas fa-home" style="color: white; font-size: 20px"></i></a>
     <!-- Button trigger modal -->
     <a href="#"style="float:right;color: white" data-toggle="modal" data-target="#form-signin">Sign in</a>
     <a href="/signup" style="float:right ">Sign up</a>
     <a href="#" style="float:right">Community</a>
-  
+
   <!-- Modal -->
     <div class="modal fade" id="form-signin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -34,11 +34,11 @@
                   <i class="fas fa-user"></i>
                   <input type="text" placeholder="Username" name="username" autofocus="1" required>
               </div>
-            
+
               <div class="textbox">
                    <i class="fas fa-lock"></i>
                    <input type="password" placeholder="Password" name="password" required>
-              </div>  
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -48,7 +48,7 @@
 
         </div>
       </div>
-    </div>  
+    </div>
 </div>
   <!-- HEADER -->
   <div class="header">
@@ -60,27 +60,31 @@
   </div>
 <!-- TIMER;SHARE;MIX -->
   <div class="share">
-    <div><button>Timer</button></div>
+    <div><button>Timer</button><i class="fal fa-alarm-clock"></i></div>
     <div><button>Mix</button></div>
     <div><button>Share</button></div>
   </div>
 </div>
 <!-- CONTENT -->
   <div class="content">
-    <i class="fas fa-cloud-rain"></i>
-    <i class="fas fa-dove"></i>
-    <i class="fas fa-water"></i>
-    <i class="fas fa-water"></i>
-    <i class="fas fa-water"></i>
-    <i class="fas fa-water"></i>
-    <i class="fas fa-water"></i>
-    <i class="fas fa-water"></i>
+    {% for data in dataHtml %}
+      <i  onclick="playPause('{{data.link}}')"  class="{{ data.classIcon }}"></i>
+    {% endfor%}
   </div>
 
   <div class="footer">
     <h2>Footer</h2>
   </div>
 </div>
+<script>
+  function playPause(link){
+  var myAudio = document.getElementById(link); 
+  if (myAudio.paused) 
+    myAudio.play(); 
+  else 
+    myAudio.pause(); 
+  } 
 
+</script>
 </body>
 </html>

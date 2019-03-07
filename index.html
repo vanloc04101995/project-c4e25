@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="button-demo">Click</button>
+
+    <script>
+        let buttonDemo = document.getElementById('button-demo');        
+        buttonDemo.addEventListener('click', () => {
+            let soundPlay = new Audio("https://www.dropbox.com/s/zbhd0440kpa2ch3/true.mp3?raw=1");
+            soundPlay.play();
+        });
+    </script>
+</body>
+</html>

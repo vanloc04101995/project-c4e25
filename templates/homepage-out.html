@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static\icofont.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -55,14 +56,14 @@
     <h1>Sounds in life</h1>
   </div>
  <!-- PLAY TOOL -->
-  <div class="play">
+  <!-- <div class="play">
      <i class="fas fa-play"></i>
-  </div>
+  </div> -->
 <!-- TIMER;SHARE;MIX -->
   <div class="share">
-    <div><button>Timer</button><i class="fal fa-alarm-clock"></i></div>
-    <div><button>Mix</button></div>
-    <div><button>Share</button></div>
+    <div ><i class="icofont-ui-alarm"></i></div>
+    <div ><i id ="btn1" onclick="change(0)"  style="color: red" class="icofont-ui-play"></i><i id= "btn2" onclick="change(1)" style="color:green; display:none" class="icofont-ui-pause"></i></div>
+    <div style="color: blue"><i class="icofont-share-alt"></i></div>
   </div>
 </div>
 <!-- CONTENT -->
@@ -76,15 +77,17 @@
     <h2>Footer</h2>
   </div>
 </div>
-<script>
-  function playPause(link){
-  var myAudio = document.getElementById(link); 
-  if (myAudio.paused) 
-    myAudio.play(); 
-  else 
-    myAudio.pause(); 
-  } 
 
+<script>
+  function change(sw){
+    if (sw == 0) {
+      document.getElementById("btn1").style.display = "none";
+      document.getElementById("btn2").style.display = "inline";
+    }else {
+    document.getElementById("btn1").style.display = "inline";
+    document.getElementById("btn2").style.display = "none";
+    }
+}
 </script>
 </body>
 </html>

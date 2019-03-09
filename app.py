@@ -19,6 +19,7 @@ def home():
                 "classIcon": sound.classIcon,
                 "playing": False,
                 "audio": None,
+                "loading": True,
             }
             sounds.append(item)
         # print(sounds)
@@ -26,12 +27,23 @@ def home():
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-       
+        sounds = []
+        data = Sound.objects()
+        for sound in data:
+            item = {
+                "name": sound.name,
+                "link": sound.link,
+                "classIcon": sound.classIcon,
+                "playing": False,
+                "audio": None,
+            }
+            sounds.append(item)
+        print(sounds)
         user = Register.objects(username=username).first()
         if user != None:
             if user.password==password :
                 session["token"] = username
-                return render_template("homepage-in.html")
+                return render_template("homepage-in.html",dataHtml=sounds,userName=user)
             else:
                 flash("Invalid password")
                 return redirect("/")

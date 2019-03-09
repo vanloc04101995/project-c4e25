@@ -2,23 +2,24 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static\icofont.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="static\style-out.css">
-  <!-- <link rel="stylesheet" href="static\style-login.css"> -->
 </head>
-<body>
-<div class="container">
+<body id ="changeImage">
   <div class="topnav">
-    <a><i class="fas fa-home" style="color: white; font-size: 20px"></i></a>
     <!-- Button trigger modal -->
-    <a href="#"style="float:right;color: white" data-toggle="modal" data-target="#form-signin">Sign in</a>
-    <a href="/signup" style="float:right ">Sign up</a>
-    <a href="#" style="float:right">Community</a>
+    <a href= "/"class ="icon-home"><i class="fas fa-home" style="color: white;font-size: 40px"></i></a>
+    <div class ="top-sub">
+    <a  href="#"style="float:right" data-toggle="modal" data-target="#form-signin">Sign in</a>
+    <a  href="/signup" style="float:right ">Sign up</a>
+    <a  href="#" style="float:right">Community</a>
+    </div>
 
-  <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="form-signin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -49,69 +50,62 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
   <!-- HEADER -->
   <div class="header">
     <h1>Sounds in life</h1>
   </div>
- <!-- PLAY TOOL -->
-  <div class="play">
-     <i class="fas fa-play"></i>
-  </div>
+
 <!-- TIMER;SHARE;MIX -->
   <div class="share">
-    <div><button>Timer</button><i class="fal fa-alarm-clock"></i></div>
-    <div><button>Mix</button></div>
-    <div><button>Share</button></div>
+      <div style="color: white"><i class="icofont-ui-alarm"></i></div>
+      <div ><i id ="btn1" onclick="change(0)"  style="color: red" class="icofont-ui-play"></i><i id= "btn2" onclick="change(1)" style="color:green; display:none" class="icofont-ui-pause"></i></div>
+      <div style="color: white"><i class="icofont-share-alt"></i></div>
   </div>
-</div>
+
 <!-- CONTENT -->
   <div class="content">
-    {% for data in dataHtml %}
-<<<<<<< HEAD
-    <i id="{{data.name}}" class="{{data.classIcon}}"></i>
-=======
-      <i  onclick="playPause('{{data.link}}')"  class="{{ data.classIcon }}"></i>
->>>>>>> fb48189a7147537326dd5254b54db7efa9f0e664
-    {% endfor%}
+      {% for data in dataHtml %}
+      <i id="{{data.name}}" class="{{data.classIcon}}"></i>
+      <input id ="myRange"class ="volume" type="range" min="0" max="1" step="0.02" value="0">
+      {% endfor%}
   </div>
 
-  <div class="footer">
-    <h2>Footer</h2>
-  </div>
-</div>
-<script>
-  function playPause(link){
-  var myAudio = document.getElementById(link); 
-  if (myAudio.paused) 
-    myAudio.play(); 
-  else 
-    myAudio.pause(); 
-  } 
 
-<<<<<<< HEAD
+
+
 <script>
   const data = {{ dataHtml|tojson }};
-  data.forEach((item) => {
-    let btnSound = document.getElementById(item.name);
-    btnSound.addEventListener('click', () => {
-      if (item.audio === null) {
-        let audio = new Audio(item.link);
-        item.audio = audio;
-      }
-      if (!item.playing) {
-        item.audio.play();
-        item.playing = true;
-      } else {
-        item.audio.pause();
-        item.playing = false;
-      }
+    data.forEach((item) => {
+      let btnSound = document.getElementById(item.name);
+      btnSound.addEventListener('click', () => {
+        if (item.audio === null) {
+          let audio = new Audio(item.link);
+          item.audio = audio;
+        }
+        if (!item.playing) {
+          item.audio.play();
+         
+          document.getElementById(item.name).style.color ="green";
+          item.playing = true;
+        } else {
+          item.audio.pause();
+          document.getElementById(item.name).style.color ="white";
+          item.playing = false;
+        }
+      })
     })
-  })
 
 
-=======
->>>>>>> fb48189a7147537326dd5254b54db7efa9f0e664
+  function change(sw){
+    if (sw == 0) {
+      document.getElementById("btn1").style.display = "none";
+      document.getElementById("btn2").style.display = "inline";
+    }else {
+    document.getElementById("btn1").style.display = "inline";
+    document.getElementById("btn2").style.display = "none";
+    }
+}
 </script>
 </body>
 </html>

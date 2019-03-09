@@ -1,10 +1,6 @@
 import mongoengine
 
-<<<<<<< HEAD
 # mongodb://<dbuser>:<dbpassword>@ds255005.mlab.com:55005/sound
-=======
-#mongodb://<dbuser>:<dbpassword>@ds255005.mlab.com:55005/sound
->>>>>>> fb48189a7147537326dd5254b54db7efa9f0e664
 host = "ds255005.mlab.com"
 port = 55005
 db_name = "sound"

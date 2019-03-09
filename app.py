@@ -9,7 +9,6 @@ mlab.connect()
 @app.route('/', methods=["GET","POST"])
 def home():
     if request.method == "GET":
-<<<<<<< HEAD
         # get database
         sounds = []
         data = Sound.objects()
@@ -24,11 +23,6 @@ def home():
             sounds.append(item)
         print(sounds)
         return render_template("homepage-out.html", dataHtml=sounds)
-=======
-        data = Sound.objects()
-        print(data)
-        return render_template("homepage-out.html", dataHtml = data)
->>>>>>> fb48189a7147537326dd5254b54db7efa9f0e664
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -44,7 +38,17 @@ def home():
         else:
             flash("Invalid username")
             return redirect("/")
-
+# def signup():
+#     if request.method == "GET":
+#         return render_template("sign-up-form.html")
+#     elif request.method == "POST":
+#         username= request.form["username"]
+#         password=request.form["password"]
+#         dateOfBirth = request.form["dateOfBirth"]
+#         email = request.form["email"]
+#         f_objects =  Register(username=username, password= password,dateOfBirth=dateOfBirth,email=email)
+#         f_objects.save()
+#         return redirect("/")
 
 # @app.route('/login', methods=["GET","POST"])
 # def login():

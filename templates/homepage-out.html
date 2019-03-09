@@ -68,11 +68,7 @@
 <!-- CONTENT -->
   <div class="content">
     {% for data in dataHtml %}
-<<<<<<< HEAD
-    <i id="{{data.name}}" class="{{data.classIcon}}"></i>
-=======
       <i  onclick="playPause('{{data.link}}')"  class="{{ data.classIcon }}"></i>
->>>>>>> fb48189a7147537326dd5254b54db7efa9f0e664
     {% endfor%}
   </div>
 
@@ -80,16 +76,7 @@
     <h2>Footer</h2>
   </div>
 </div>
-<script>
-  function playPause(link){
-  var myAudio = document.getElementById(link); 
-  if (myAudio.paused) 
-    myAudio.play(); 
-  else 
-    myAudio.pause(); 
-  } 
 
-<<<<<<< HEAD
 <script>
   const data = {{ dataHtml|tojson }};
   data.forEach((item) => {
@@ -110,8 +97,6 @@
   })
 
 
-=======
->>>>>>> fb48189a7147537326dd5254b54db7efa9f0e664
 </script>
 </body>
 </html>

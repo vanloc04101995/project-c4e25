@@ -8,18 +8,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="static\style-out.css">
-  <!-- <link rel="stylesheet" href="static\style-login.css"> -->
 </head>
-<body>
-<div class="container">
+<body id ="changeImage">
   <div class="topnav">
-    <a><i class="fas fa-home" style="color: white; font-size: 20px"></i></a>
     <!-- Button trigger modal -->
-    <a href="#"style="float:right;color: white" data-toggle="modal" data-target="#form-signin">Sign in</a>
-    <a href="/signup" style="float:right ">Sign up</a>
-    <a href="#" style="float:right">Community</a>
+    <a href= "/"class ="icon-home"><i class="fas fa-home" style="color: white;font-size: 40px"></i></a>
+    <div class ="top-sub">
+    <a  href="#"style="float:right" data-toggle="modal" data-target="#form-signin">Sign in</a>
+    <a  href="/signup" style="float:right ">Sign up</a>
+    <a  href="#" style="float:right">Community</a>
+    </div>
 
-  <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="form-signin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -50,35 +50,53 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
   <!-- HEADER -->
   <div class="header">
     <h1>Sounds in life</h1>
   </div>
- <!-- PLAY TOOL -->
-  <!-- <div class="play">
-     <i class="fas fa-play"></i>
-  </div> -->
+
 <!-- TIMER;SHARE;MIX -->
   <div class="share">
-    <div ><i class="icofont-ui-alarm"></i></div>
-    <div ><i id ="btn1" onclick="change(0)"  style="color: red" class="icofont-ui-play"></i><i id= "btn2" onclick="change(1)" style="color:green; display:none" class="icofont-ui-pause"></i></div>
-    <div style="color: blue"><i class="icofont-share-alt"></i></div>
+      <div style="color: white"><i class="icofont-ui-alarm"></i></div>
+      <div ><i id ="btn1" onclick="change(0)"  style="color: red" class="icofont-ui-play"></i><i id= "btn2" onclick="change(1)" style="color:green; display:none" class="icofont-ui-pause"></i></div>
+      <div style="color: white"><i class="icofont-share-alt"></i></div>
   </div>
-</div>
+
 <!-- CONTENT -->
   <div class="content">
-    {% for data in dataHtml %}
-      <i  onclick="playPause('{{data.link}}')"  class="{{ data.classIcon }}"></i>
-    {% endfor%}
+      {% for data in dataHtml %}
+      <i id="{{data.name}}" class="{{data.classIcon}}"></i>
+      <input id ="myRange"class ="volume" type="range" min="0" max="1" step="0.02" value="0">
+      {% endfor%}
   </div>
 
-  <div class="footer">
-    <h2>Footer</h2>
-  </div>
-</div>
+
+
 
 <script>
+  const data = {{ dataHtml|tojson }};
+    data.forEach((item) => {
+      let btnSound = document.getElementById(item.name);
+      btnSound.addEventListener('click', () => {
+        if (item.audio === null) {
+          let audio = new Audio(item.link);
+          item.audio = audio;
+        }
+        if (!item.playing) {
+          item.audio.play();
+         
+          document.getElementById(item.name).style.color ="green";
+          item.playing = true;
+        } else {
+          item.audio.pause();
+          document.getElementById(item.name).style.color ="white";
+          item.playing = false;
+        }
+      })
+    })
+
+
   function change(sw){
     if (sw == 0) {
       document.getElementById("btn1").style.display = "none";

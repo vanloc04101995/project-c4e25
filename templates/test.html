@@ -1,0 +1,30 @@
+const data = {{ dataHtml|tojson }};
+    data.forEach((item) => {
+      let btnSound = document.getElementById(item.name);
+      btnSound.addEventListener('click', () => {
+        if (item.audio === null) {
+          let audio = new Audio(item.link);
+          item.audio = audio;
+        }
+        if (!item.playing) {
+          item.audio.play();
+          document.getElementById(item.name).style.color ="green";
+          item.playing = true;
+        } else {
+          item.audio.pause();
+          document.getElementById(item.name).style.color ="white";
+          item.playing = false;
+        }
+      })
+    })
+
+
+  function change(sw){
+    if (sw == 0) {
+      document.getElementById("btn1").style.display = "none";
+      document.getElementById("btn2").style.display = "inline";
+    }else {
+    document.getElementById("btn1").style.display = "inline";
+    document.getElementById("btn2").style.display = "none";
+    }
+}

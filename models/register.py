@@ -9,4 +9,4 @@ class Sound(Document):
     name = StringField()
     link = StringField()
     classIcon = StringField()
-
+    subName = StringField()

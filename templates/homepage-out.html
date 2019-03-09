@@ -15,8 +15,13 @@
     <!-- Button trigger modal -->
     <a href= "/"class ="icon-home"><i class="fas fa-home" style="color: white;font-size: 40px"></i></a>
     <div class ="top-sub">
-    <a  href="#"style="float:right" data-toggle="modal" data-target="#form-signin">Sign in</a>
-    <a  href="#"style="float:right" data-toggle="modal" data-target="#form-signup">Sign up</a>
+    {% if session.logged %}
+      <a  href="/logout"style="float:right">Log out</a>
+    {% else %}
+      <a  href="#"style="float:right" data-toggle="modal" data-target="#form-signin">Sign in</a>
+      <a  href="#"style="float:right" data-toggle="modal" data-target="#form-signup">Sign up</a>
+    {% endif %}
+    
     <!-- <a  href="/signup" style="float:right ">Sign up</a> -->
     <a  href="#" style="float:right">Community</a>
     </div>
@@ -31,7 +36,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-        <form  method="POST">
+        <form id="login-form" method="POST" action="/login">
           <div class="modal-body">
               <div class="textbox">
                   <i class="fas fa-user"></i>
@@ -42,10 +47,11 @@
                    <i class="fas fa-lock"></i>
                    <input type="password" placeholder="Password" name="password" required>
               </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <input id="btn-login" type="button" class="btn btn-primary" value="Login">
           </div>
         </form>
 
@@ -84,7 +90,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
           </div>
         </form>
 
@@ -120,6 +126,10 @@
 
 <script>
   const data = {{ dataHtml|tojson }};
+  const session = {{ session|tojson }};
+  $(`#btn-login`).on('click', () => {
+    $(`#login-form`).submit();
+  })
   data.forEach((item) => {
     let btnSound = $(`#${item.name}`);
     btnSound.on('click', () => {

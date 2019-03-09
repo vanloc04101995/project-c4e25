@@ -70,15 +70,7 @@
     grid-column: 9;
 }
 
-  /* .share > div:nth-child(1) {
-    margin-left: auto;
-  }
-  .share > div:nth-child(2) {
-    margin-right: auto;
-  }
-  .share > div:nth-child(3) {
-    margin-right: auto;
-  } */
+
   .share i{
     font-size: 60px;
     padding-top: 25px;
@@ -86,12 +78,7 @@
   .share a{
     text-align: center;
   }
-  /* .footer {
-    padding: 20px;
-    text-align: center;
-    background: #ddd;
-    margin-top: 20px;
-  } */
+ 
   .content{
     color: white;
     padding: 20px;
@@ -103,12 +90,21 @@
     margin: 50px;
     padding: 30px;
     text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
   }
+
+  .content i:hover{
+    font-size: 100px;
+    color: green;
+  }
+
 
   @media screen and (max-width: 600px) {
     .topnav a {
       float: none;
       width: 100%;
+      background: none !important;
     }
     .content i{
       font-size: 60px;
@@ -168,6 +164,20 @@
   cursor: pointer;
 }
 
+.volume ::-webkit-slider-runnable-track{
+  border-radius: 5px;
+}
+
+/* .hoverSound {
+  -moz-transition: all .5s linear;
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+}
+.hoverSound.rotate {
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  transform: rotate(90deg);
+} */
 /* .volume::-moz-range-thumb {
   width: 25px;
   height: 25px;
@@ -176,7 +186,22 @@
   cursor: pointer;
 } */
 
+/* .content {
+  -webkit-animation: spin 2s linear infinite; 
+  animation: spin 2s linear infinite;
+  animation-duration: 3s;
+} */
 
+/* Safari */
+/* @-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} */
 
 
 

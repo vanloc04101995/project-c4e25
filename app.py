@@ -8,8 +8,8 @@ mlab.connect()
 
 @app.route('/', methods=["GET","POST"])
 def home():
+    test = 1
     if request.method == "GET":
-        # get database
         sounds = []
         data = Sound.objects()
         for sound in data:
@@ -19,19 +19,22 @@ def home():
                 "classIcon": sound.classIcon,
                 "playing": False,
                 "audio": None,
+                "loading": True,
             }
             sounds.append(item)
-        # print(sounds)
-        return render_template("homepage-out.html", dataHtml=sounds)
-    elif request.method == "POST":
+        return render_template("homepage-out.html", dataHtml=sounds,test=test)
+
+@app.route('/login',methods=["GET","POST"])
+def login():
+    if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-       
         user = Register.objects(username=username).first()
         if user != None:
             if user.password==password :
                 session["token"] = username
-                return render_template("homepage-in.html")
+                session["logged"] = True
+                return redirect("/")
             else:
                 flash("Invalid password")
                 return redirect("/")
@@ -39,20 +42,18 @@ def home():
             flash("Invalid username")
             return redirect("/")
 
-
 @app.route("/logout")
 def logout():
     if "token" in session:
         del session["token"]
+        session["logged"] = False
         return redirect("/")
     else:
         return redirect("/")
 
 @app.route('/signup',methods=["GET","POST"])
 def signup():
-    if request.method == "GET":
-        return render_template("sign-up-form.html")
-    elif request.method == "POST":
+    if request.method == "POST":
         username= request.form["username"]
         password=request.form["password"]
         dateOfBirth = request.form["dateOfBirth"]

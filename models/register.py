@@ -5,16 +5,8 @@ class Register(Document):
     password = StringField()
     dateOfBirth = StringField()
     email = StringField()
-
-    
-# class Sound(Document):
-#     name = StringField()
-#     classIcon = StringField()
-#     link = StringField()
-    
-
 class Sound(Document):
     name = StringField()
     link = StringField()
     classIcon = StringField()
-    subName= StringField()
+    subName = StringField()

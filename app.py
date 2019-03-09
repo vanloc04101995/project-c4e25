@@ -1,6 +1,7 @@
 from flask import Flask,request,render_template, redirect, flash, session
 import mlab
 from models.register import Register
+from models.register import Sound
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "<d9H\9nhpv4eRD@$mT*bg(Z@=bSCF:*=Q-anNQv3*4a;~[qUCeNx+"
 mlab.connect()
@@ -8,10 +9,30 @@ mlab.connect()
 @app.route('/', methods=["GET","POST"])
 def home():
     if request.method == "GET":
-        return render_template("homepage-out.html")
+<<<<<<< HEAD
+        # get database
+        sounds = []
+        data = Sound.objects()
+        for sound in data:
+            item = {
+                "name": sound.name,
+                "link": sound.link,
+                "classIcon": sound.classIcon,
+                "playing": False,
+                "audio": None,
+            }
+            sounds.append(item)
+        print(sounds)
+        return render_template("homepage-out.html", dataHtml=sounds)
+=======
+        data = Sound.objects()
+        print(data)
+        return render_template("homepage-out.html", dataHtml = data)
+>>>>>>> fb48189a7147537326dd5254b54db7efa9f0e664
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+       
         user = Register.objects(username=username).first()
         if user != None:
             if user.password==password :
@@ -63,7 +84,6 @@ def signup():
         email = request.form["email"]
         f_objects =  Register(username=username, password= password,dateOfBirth=dateOfBirth,email=email)
         f_objects.save()
-        return "OK"
-
+        return redirect("/")
 if __name__ == '__main__':
   app.run(debug=True)

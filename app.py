@@ -8,10 +8,11 @@ mlab.connect()
 
 @app.route('/', methods=["GET","POST"])
 def home():
-    test = 1
     if request.method == "GET":
         sounds = []
+        users_login = []
         data = Sound.objects()
+        users = Register.objects()
         for sound in data:
             item = {
                 "name": sound.name,
@@ -23,7 +24,13 @@ def home():
                 "loading": True,
             }
             sounds.append(item)
-        return render_template("homepage-out.html", dataHtml=sounds,test=test)
+        for user in users:
+            db_user = {
+                "username": user.username,
+                "password": user.password
+            }
+            users_login.append(db_user)
+        return render_template("homepage-out.html", dataHtml=sounds, users=users_login)
 
 @app.route('/login',methods=["GET","POST"])
 def login():
@@ -37,10 +44,8 @@ def login():
                 session["logged"] = True
                 return redirect("/")
             else:
-                flash("Invalid password")
                 return redirect("/")
         else:
-            flash("Invalid username")
             return redirect("/")
 
 @app.route("/logout")

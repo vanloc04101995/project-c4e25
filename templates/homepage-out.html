@@ -38,18 +38,18 @@
           <div class="modal-body">
               <div class="textbox">
                   <i class="fas fa-user"></i>
-                  <input type="text" placeholder="Username" name="username" autofocus="1" autocomplete="off" required>
+                  <input id="input-username" type="text" placeholder="Username" name="username" autofocus="1" autocomplete="off" required>
               </div>
 
               <div class="textbox">
                    <i class="fas fa-lock"></i>
-                   <input type="password" placeholder="Password" name="password" required>
+                   <input id="input-password" type="password" placeholder="Password" name="password" required>
               </div>
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <input id="btn-login" type="button" class="btn btn-primary" value="Login">
+            <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+            <input id="btn-login" type="submit" class="btn btn-primary" value="Login">
           </div>
         </form>
 
@@ -69,7 +69,7 @@
           <div class="modal-body">
               <div class="textbox">
                   <i class="fas fa-user"></i>
-                  <input type="text" placeholder="Username" name="username" autofocus="1" autocomplete="off" required>
+                  <input type="text" placeholder="Username" id="user-name-signup" name="username" autofocus="1" autocomplete="off" required>
               </div>
 
               <div class="textbox">
@@ -87,8 +87,8 @@
            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+            <input type="submit" id="btn-signup" class="btn btn-primary" value="Sign Up">
           </div>
         </form>
 

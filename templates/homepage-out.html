@@ -103,13 +103,13 @@
 
 <!-- TIMER;SHARE;MIX -->
   <div class="share">
-      <div  class="dropdown" style="color: white"><i onclick="clockChange(0)" class="icofont-ui-alarm"></i></div>
+      <div  class="dropdown" id= "user-clock"style="color: white"><i onclick="clockChange(0)" class="icofont-ui-alarm"></i></div>
       <div ><i id ="btn1" onclick="change(0)"  style="color: red; display:none" class="icofont-ui-play"></i><i id= "btn2" onclick="change(1)" style="color:green;" class="icofont-ui-pause"></i></div>
       <!-- <div style="color: white"><i class="icofont-share-alt"></i></div> -->
       {% if session.logged %}
       <div><a href ="/" style="color: white;text-decoration: none"><i class="icofont-share-alt"></i></a></div>
       {% else %}
-      <div  style="color: white"><i onclick="myFunction()" class="icofont-share-alt"></i></div>
+      <div  style="color: white"><i id="user-share" onclick="myFunction()" class="icofont-share-alt"></i></div>
       {% endif %}
       <!-- <div id="drop-content" class="dropdown-content">
           <p>Hello World!</p>
@@ -153,9 +153,9 @@
           alert("Invalid Username or Password!");
         }
       })
-      $('#user-share').on('click',() =>{
-        alert("We are developing this!")
-      })
+      // $('#user-share').on('click',() =>{
+      //   alert("We are developing this!")
+      // })
       $('#user-clock').on('click',() =>{
         alert("We are developing this!")
       })

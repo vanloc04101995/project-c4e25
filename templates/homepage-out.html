@@ -71,7 +71,7 @@
           <div class="modal-body">
               <div class="textbox">
                   <i class="fas fa-user"></i>
-                  <input type="text" placeholder="Username" name="username" autofocus="1" autocomplete="off" required>
+                  <input type="text" placeholder="Username" id="user-name-signup" name="username" autofocus="1" autocomplete="off" required>
               </div>
 
               <div class="textbox">
@@ -90,7 +90,7 @@
           </div>
           <div class="modal-footer">
             <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
-            <input type="submit" class="btn btn-primary" value="Sign Up">
+            <input type="submit" id="btn-signup" class="btn btn-primary" value="Sign Up">
           </div>
         </form>
 
@@ -129,6 +129,7 @@
   const session = {{ session|tojson }};
   const users = {{ users|tojson }};
   let loginError = true;
+  let loginError1 = true;
   let loginshare = true;
   $('#btn-login').on('click', () => {
     for (let index = 0; index < users.length; index++) {
@@ -145,10 +146,22 @@
     }
   })
   $('#user-share').on('click',() =>{
-    alert("This can't using!")
+    alert("We are developing this!")
   })
   $('#user-clock').on('click',() =>{
-    alert("This can't using!")
+    alert("We are developing this!")
+  })
+  $('#btn-signup').on('click',()=>{
+    for(let index=0;index<users.length;index++){
+      const user = users[index];
+      if(user.name === $('#user-name-signup')[0].value){
+        loginError1 = false;
+        break;
+      }
+    }
+    if (loginError1) {
+      alert("The account currently exists!");
+    }
   })
   data.forEach((item) => {
     let btnSound = $(`#${item.name}`);

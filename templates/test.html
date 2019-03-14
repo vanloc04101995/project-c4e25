@@ -1,30 +1,111 @@
-const data = {{ dataHtml|tojson }};
+<script>
+    const data = {{ dataHtml|tojson }};
+    const session = {{ session|tojson }};
+    $(`#btn-login`).on('click', () => {
+      $(`#login-form`).submit();
+    })
     data.forEach((item) => {
-      let btnSound = document.getElementById(item.name);
-      btnSound.addEventListener('click', () => {
+      let btnSound = $(`#${item.name}`);
+      btnSound.on('click', () => {
+        if(item.loading) {
+          $(`#${item.name}-loading`).css({'display':'inline-block'});
+          $(`#${item.name}`).css({'display':'none'});
+        }
         if (item.audio === null) {
           let audio = new Audio(item.link);
           item.audio = audio;
         }
         if (!item.playing) {
-          item.audio.play();
-          document.getElementById(item.name).style.color ="green";
+          item.loading = true;
+          item.audio.play().then(() => {
+            item.loading = false;
+            $(`#${item.name}-loading`).css({'display':'none'});
+            $(`#${item.name}`).css({'display':'inline-block'});
+          });
+          btnSound.css('color', 'green');
           item.playing = true;
         } else {
+          item.loading = false;
           item.audio.pause();
-          document.getElementById(item.name).style.color ="white";
+          btnSound.css('color', 'white');
           item.playing = false;
         }
       })
     })
 
+    function change(sw){
+        if (sw == 0) {
+          document.getElementById("btn1").style.display = "none";
+          document.getElementById("btn2").style.display = "inline";
+          data.forEach((item) => {
+          if (item.pause) {
+                  item.audio.play();
+                  item.playing = true;
+              }
+          })
+          }else {
+            document.getElementById("btn1").style.display = "inline";
+            document.getElementById("btn2").style.display = "none";
+            data.forEach((item) => {
+              if (item.playing) {
+                  item.audio.pause();
+                  item.playing = false;
+              
+              }
+            })
+          }
+      }
+      </script>
 
-  function change(sw){
-    if (sw == 0) {
-      document.getElementById("btn1").style.display = "none";
-      document.getElementById("btn2").style.display = "inline";
-    }else {
-    document.getElementById("btn1").style.display = "inline";
-    document.getElementById("btn2").style.display = "none";
+
+<script>
+    const data = {{ dataHtml|tojson }};
+    const session = {{ session|tojson }};
+    function change(sw){
+      if (sw == 0) {
+        document.getElementById("btn1").style.display = "none";
+        document.getElementById("btn2").style.display = "inline";
+        $(`#btn-login`).on('click', () => {
+        $(`#login-form`).submit();
+        })
+        data.forEach((item) => {
+          let btnSound = $(`#${item.name}`);
+          btnSound.on('click', () => {
+            if(item.loading) {
+              $(`#${item.name}-loading`).css({'display':'inline-block'});
+              $(`#${item.name}`).css({'display':'none'});
+            }
+            if (item.audio === null) {
+              let audio = new Audio(item.link);
+              item.audio = audio;
+            }
+            if (!item.playing) {
+              item.loading = true;
+              item.audio.play().then(() => {
+                item.loading = false;
+                $(`#${item.name}-loading`).css({'display':'none'});
+                $(`#${item.name}`).css({'display':'inline-block'});
+              });
+              btnSound.css('color', 'green');
+              item.playing = true;
+            } else {
+              item.loading = false;
+              item.audio.pause();
+              btnSound.css('color', 'white');
+              item.playing = false;
+            }
+          })
+        })
+        }else {
+          document.getElementById("btn1").style.display = "inline";
+          document.getElementById("btn2").style.display = "none";
+          data.forEach((item) => {
+            if (item.playing) {
+                item.audio.pause();
+                item.playing = false;
+            
+            }
+          })
+        }
     }
-}
+    </script>

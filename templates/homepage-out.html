@@ -22,8 +22,6 @@
       <a  href="#"style="float:right" data-toggle="modal" data-target="#form-signup">Sign up</a>
     {% endif %}
     
-    <!-- <a  href="/signup" style="float:right ">Sign up</a> -->
-    <a  href="#" style="float:right">Community</a>
     </div>
 
     <!-- Modal -->
@@ -105,10 +103,20 @@
 
 <!-- TIMER;SHARE;MIX -->
   <div class="share">
-      <div style="color: white"><i class="icofont-ui-alarm"></i></div>
-      <div ><i id ="btn1" onclick="change(0)"  style="color: red" class="icofont-ui-play"></i><i id= "btn2" onclick="change(1)" style="color:green; display:none" class="icofont-ui-pause"></i></div>
-      <div style="color: white"><i class="icofont-share-alt"></i></div>
+      <div  class="dropdown" style="color: white"><i onclick="clockChange(0)" class="icofont-ui-alarm"></i></div>
+      <div ><i id ="btn1" onclick="change(0)"  style="color: red; display:none" class="icofont-ui-play"></i><i id= "btn2" onclick="change(1)" style="color:green;" class="icofont-ui-pause"></i></div>
+      <!-- <div style="color: white"><i class="icofont-share-alt"></i></div> -->
+      {% if session.logged %}
+      <div><a href ="/" style="color: white;text-decoration: none"><i class="icofont-share-alt"></i></a></div>
+      {% else %}
+      <div  style="color: white"><i onclick="myFunction()" class="icofont-share-alt"></i></div>
+      {% endif %}
+      <!-- <div id="drop-content" class="dropdown-content">
+          <p>Hello World!</p>
+      </div>  -->
   </div>
+
+
 
 <!-- CONTENT -->
   <div class="content">
@@ -125,55 +133,72 @@
 
 
 <script>
-  const data = {{ dataHtml|tojson }};
-  const session = {{ session|tojson }};
-  $(`#btn-login`).on('click', () => {
-    $(`#login-form`).submit();
-  })
-  data.forEach((item) => {
-    let btnSound = $(`#${item.name}`);
-    btnSound.on('click', () => {
-      if(item.loading) {
-        $(`#${item.name}-loading`).css({'display':'inline-block'});
-        $(`#${item.name}`).css({'display':'none'});
-      }
-      if (item.audio === null) {
-        let audio = new Audio(item.link);
-        item.audio = audio;
-      }
-      if (!item.playing) {
-        item.loading = true;
-        item.audio.play().then(() => {
-          item.loading = false;
-          $(`#${item.name}-loading`).css({'display':'none'});
-          $(`#${item.name}`).css({'display':'inline-block'});
-        });
-        btnSound.css('color', 'green');
-        item.playing = true;
-      } else {
-        item.loading = false;
-        item.audio.pause();
-        btnSound.css('color', 'white');
-        item.playing = false;
-      }
-    })
-  })
+      const data = {{ dataHtml|tojson }};
+      const session = {{ session|tojson }};
+      $(`#btn-login`).on('click', () => {
+        $(`#login-form`).submit();
+      })
+      data.forEach((item) => {
+        let btnSound = $(`#${item.name}`);
+        btnSound.on('click', () => {
+          if(item.loading) {
+            $(`#${item.name}-loading`).css({'display':'inline-block'});
+            $(`#${item.name}`).css({'display':'none'});
+          }
+          if (item.audio === null) {
+            let audio = new Audio(item.link);
+            audio.loop = true;
+            item.audio = audio;
+          }
+          if (!item.playing) {
+            item.loading = true;
+            item.audio.play().then(() => {
+              item.loading = false;
+              $(`#${item.name}-loading`).css({'display':'none'});
+              $(`#${item.name}`).css({'display':'inline-block'});
+            });
+            btnSound.css('color', 'green');
+            item.playing = true;
+            // item.audio.loop
+          } else {
+            item.loading = false;
+            item.audio.pause();
+            
+            btnSound.css('color', 'white');
+            item.playing = false;
+            
+          }
+        })
+      })
+  
+      function change(sw){
+          if (sw == 0) {
+            document.getElementById("btn1").style.display = "none";
+            document.getElementById("btn2").style.display = "inline";
+            data.forEach((item) => {
+            if (item.pause) {
+                    item.audio.play();
+                    item.playing = true;
+                }
+            })
+            }else {
+              document.getElementById("btn1").style.display = "inline";
+              document.getElementById("btn2").style.display = "none";
+              data.forEach((item) => {
+                if (item.playing) {
+                  item.audio.pause();
+                  item.playing = false;
+                  // let audio = new Audio(item.link);
+                  // item.audio = audio;
+                   
+                }
+              })
+            }
+        }
 
-
-  function change(sw){
-    if (sw == 0) {
-      document.getElementById("btn1").style.display = "none";
-      document.getElementById("btn2").style.display = "inline";
-    }else {
-    document.getElementById("btn1").style.display = "inline";
-    document.getElementById("btn2").style.display = "none";
-    }
-}
-
-function showContent(){
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("myDiv").style.display = "block";
-}
+        function myFunction() {
+           alert("You must log in to use the function");
+        }
 </script>
 </body>
 </html>

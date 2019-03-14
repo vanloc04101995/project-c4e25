@@ -18,6 +18,7 @@ def home():
                 "link": sound.link,
                 "classIcon": sound.classIcon,
                 "playing": False,
+                "pause" : True,
                 "audio": None,
                 "loading": True,
             }

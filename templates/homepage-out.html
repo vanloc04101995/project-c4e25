@@ -135,6 +135,42 @@
 <script>
       const data = {{ dataHtml|tojson }};
       const session = {{ session|tojson }};
+      const users = {{ users|tojson }};
+      let loginError = true;
+      let loginError1 = true;
+      let loginshare = true;
+      $('#btn-login').on('click', () => {
+        for (let index = 0; index < users.length; index++) {
+          const user = users[index];
+          if (user.username === $('#input-username')[0].value) {
+            if (user.password === $('#input-password')[0].value) {
+              loginError = false;
+              break;
+            }
+          }
+        }
+        if (loginError) {
+          alert("Invalid Username or Password!");
+        }
+      })
+      $('#user-share').on('click',() =>{
+        alert("We are developing this!")
+      })
+      $('#user-clock').on('click',() =>{
+        alert("We are developing this!")
+      })
+      $('#btn-signup').on('click',()=>{
+        for(let index=0;index<users.length;index++){
+          const user = users[index];
+          if(user.name === $('#user-name-signup')[0].value){
+            loginError1 = false;
+            break;
+          }
+        }
+        if (loginError1) {
+          alert("The account currently exists!");
+        }
+      })
       $(`#btn-login`).on('click', () => {
         $(`#login-form`).submit();
       })
